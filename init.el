@@ -1,6 +1,9 @@
 (require 'package)
 (add-to-list 'package-archives
   '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/")
+             t)
 (package-initialize)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -15,7 +18,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (helm undo-tree yascroll multiple-cursors neotree company-ghc ghc hindent haskell-mode))))
+    (racket-mode helm undo-tree yascroll multiple-cursors neotree company-ghc ghc hindent haskell-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -24,17 +27,20 @@
  )
 
 
+(add-to-list 'load-path "~/.emacs.d/im")
 
 ;; basic hides, compatibilities handles
-(load "~/.emacs.d/im/resets.el")
+(require 'init-resets)
 ;; visual settings, theme liking, powerline
-(load "~/.emacs.d/im/looks.el")
+(require 'init-looks)
+
+
+(require 'init-haskell)
+
+
 ;; keybindgs, autocompletes, popups, minimap, tabs
-(load "~/.emacs.d/im/feel.el")
+(require 'init-feel)
 
 (when (display-graphic-p)
-  (load "~/.emacs.d/im/gui_settings.el")
+  (require 'init-gui)
 )
-
-;; haskell specific
-(load "~/.emacs.d/im/haskell_settings.el")
