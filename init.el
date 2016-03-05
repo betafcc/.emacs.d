@@ -33,14 +33,16 @@
 (require 'init-resets)
 ;; visual settings, theme liking, powerline
 (require 'init-looks)
+;; keybindgs, autocompletes, popups, minimap, tabs
+(require 'init-feel)
+
 
 
 (require 'init-haskell)
-
-
-;; keybindgs, autocompletes, popups, minimap, tabs
-(require 'init-feel)
+(require 'init-racket)
 
 (when (display-graphic-p)
   (require 'init-gui)
 )
+
+(provide 'init)

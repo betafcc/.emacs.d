@@ -150,10 +150,16 @@
 
 
 ;; autopair
-    (add-to-list 'load-path "~/.emacs.d/vendor/autopair") 
-    (require 'autopair)
-    (autopair-global-mode)
+;;    (add-to-list 'load-path "~/.emacs.d/vendor/autopair") 
+;;    (require 'autopair)
+;;    (autopair-global-mode)
 ;; end autopair
+;; smartparens
+      (require 'smartparens-config)
+      (smartparens-global-mode t)
+      (show-smartparens-global-mode t)
+      (set-face-attribute 'sp-pair-overlay-face nil :background "#443152")
+;; end smartparens
 
 
 ;; multiple cursors

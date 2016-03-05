@@ -1,3 +1,7 @@
+
 elpa/
 auto-save-list/
 *.elc
+
+recentf
+*~
