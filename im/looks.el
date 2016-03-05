@@ -15,6 +15,8 @@
      (set-cursor-color "#bb4444")
    ;; highlight cursor line
      (global-hl-line-mode 1)
+   ;; more contrast for selected region
+     (set-face-attribute 'region nil :background "#555" )
 
    (fringe-mode '(4 . 4))
    (set-face-attribute 'fringe nil
