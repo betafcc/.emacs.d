@@ -36,6 +36,7 @@
 ;; keybindgs, autocompletes, popups, minimap, tabs
 (require 'init-feel)
 
+;; TODO: decide loading order
 (when (display-graphic-p)
   (require 'init-gui)
 )
