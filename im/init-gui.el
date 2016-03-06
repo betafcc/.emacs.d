@@ -1,4 +1,6 @@
-(tabbar-mode 1)
+(eval-after-load (tabbar-mode 1))
+
+
 (setq linum-format "%4d ")
 ;;(define-fringe-bitmap 'right-curly-arrow
 ;;  [#b00000000

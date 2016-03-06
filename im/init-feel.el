@@ -77,9 +77,9 @@
          :box '(:line-width 5 :color "gray30" :style nil))
         (set-face-attribute
          'tabbar-selected nil
-         :background "gray75"
-         :foreground "black"
-         :box '(:line-width 5 :color "gray75" :style nil))
+         :background "#1a1a1a"
+         :foreground "white"
+         :box '(:line-width 5 :color "#1a1a1a" :style nil))
         (set-face-attribute
          'tabbar-highlight nil
          :background "white"

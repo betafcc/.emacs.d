@@ -36,13 +36,13 @@
 ;; keybindgs, autocompletes, popups, minimap, tabs
 (require 'init-feel)
 
+(when (display-graphic-p)
+  (require 'init-gui)
+)
 
 
 (require 'init-haskell)
 (require 'init-racket)
 
-(when (display-graphic-p)
-  (require 'init-gui)
-)
 
 (provide 'init)
