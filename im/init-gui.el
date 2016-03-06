@@ -35,6 +35,6 @@
 ;;(require 'tabbar)
 ;;(tabbar-mode 1)
 
-;;  (setq tabbar-ruler-global-tabbar t) ; If you want tabbar
+;;(setq tabbar-ruler-global-tabbar t) ; If you want tabbar
   ;;(setq tabbar-ruler-fancy-tab-separator 'line)
 (provide 'init-gui)

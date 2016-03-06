@@ -2,6 +2,7 @@
 *.elc
 *~
 recentf
+.mc-lists.el
 
 elpa/
 auto-save-list/
