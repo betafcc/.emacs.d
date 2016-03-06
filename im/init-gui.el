@@ -1,4 +1,3 @@
-(eval-after-load (tabbar-mode 1))
 
 
 (setq linum-format "%4d ")
@@ -23,4 +22,5 @@
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
 
+(tabbar-mode 1)
 (provide 'init-gui)
