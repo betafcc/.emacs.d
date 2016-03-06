@@ -13,12 +13,12 @@
  '(company-ghc-show-info t)
  '(custom-safe-themes
    (quote
-    ("135bbd2e531f067ed6a25287a47e490ea5ae40b7008211c70385022dbab3ab2a" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+    ("b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "135bbd2e531f067ed6a25287a47e490ea5ae40b7008211c70385022dbab3ab2a" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(inhibit-startup-buffer-menu nil)
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (racket-mode helm undo-tree yascroll multiple-cursors neotree company-ghc ghc hindent haskell-mode))))
+    (smart-mode-line-powerline-theme racket-mode helm undo-tree yascroll multiple-cursors neotree company-ghc ghc hindent haskell-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -38,7 +38,7 @@
 
 (when (display-graphic-p)
   (require 'init-gui)
-)
+)		 
 
 
 (require 'init-haskell)

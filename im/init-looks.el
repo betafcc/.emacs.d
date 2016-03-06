@@ -36,25 +36,28 @@
 ;; end basic look
 
 ;; powerline
-;;        (powerline-default-theme)
-;;              ;;(set-face-attribute 'mode-line nil :background "#ef2929" :foreground "#ffffff")
-;;        (set-face-attribute 'mode-line-buffer-id nil :foreground "#000000")
-;;        ;;(set-face-attribute 'minibuffer-prompt nil :foreground "#a40000" :background "#ffafaf")
+        (require 'powerline)
+        (powerline-default-theme)
+              ;;(set-face-attribute 'mode-line nil :background "#ef2929" :foreground "#ffffff")
+        (set-face-attribute 'mode-line-buffer-id nil :foreground "orange1" )
+        (set-face-attribute 'mode-line-inactive nil :foreground "gray50")
+;; (set-face-attribute 'minibuffer-prompt nil :foreground "#a40000" :background "#ffafaf")
 ;;             
-;;        (set-face-attribute 'mode-line nil :background "#ff0000" :foreground "#eeeeee")
-;;        (set-face-attribute 'powerline-active1 nil :background "#333333" :foreground "#00cd00")
-;;        (set-face-attribute 'powerline-active2 nil :background "#121212" :foreground "#cc0000")
+        (set-face-attribute 'mode-line nil :background "brightred" :foreground "#eeeeee")
+        (set-face-attribute 'powerline-active1 nil :background "#333333" :foreground "SpringGreen3")
+        (set-face-attribute 'powerline-active2 nil :background "#121212" :foreground "#cc0000")
 ;;    
 ;;    
-;;        (set-face-attribute 'mode-line-inactive nil :background "#333333" :foreground "#eeeeee" :box nil)
-;;        (set-face-attribute 'powerline-inactive1 nil :background "#606b6b" :foreground "#333333")
-;;        (set-face-attribute 'powerline-inactive2 nil :background "#999999" :foreground "#e4e4e4")
+        (set-face-attribute 'mode-line-inactive nil :background "#333333" :foreground "#eeeeee" :box nil)
+        (set-face-attribute 'powerline-inactive1 nil :background "#606b6b" :foreground "#333333")
+        (set-face-attribute 'powerline-inactive2 nil :background "#999999" :foreground "#e4e4e4")
 ;; These two lines are just examples
         ;;(setq powerline-arrow-shape 'curve)
         ;;(setq powerline-default-separator-dir '(right . left))
         ;; These two lines you really need.
-;;        (setq sml/theme 'powerline)
-;;        (sml/setup)			
+        ;;(setq sml/theme 'powerline)
+        ;;(sml/setup)
+
 ;; end powerline
 
 
