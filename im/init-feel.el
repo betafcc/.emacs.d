@@ -74,18 +74,18 @@
          'tabbar-unselected nil
          :background "gray30"
          :foreground "white"
-         :box '(:line-width 5 :color "gray30" :style nil))
+         :box '(:line-width 8 :color "gray30" :style nil))
         (set-face-attribute
          'tabbar-selected nil
          :background "#1a1a1a"
          :foreground "white"
-         :box '(:line-width 5 :color "#1a1a1a" :style nil))
+         :box '(:line-width 8 :color "#1a1a1a" :style nil))
         (set-face-attribute
          'tabbar-highlight nil
          :background "white"
          :foreground "black"
          :underline nil
-         :box '(:line-width 5 :color "white" :style nil))
+         :box '(:line-width 8 :color "white" :style nil))
         (set-face-attribute
          'tabbar-button nil
          :box '(:line-width 1 :color "gray20" :style nil))
@@ -211,7 +211,11 @@
           (global-set-key (kbd "<M-down>") 'move-text-down)
           (global-set-key (kbd "<M-right>") 'move-text-forward)
           (global-set-key (kbd "<M-left>")  'move-text-backward)
-
+        ;; Cycle tabbar with usual Ctrl-Tab
+          (global-set-key (kbd "<C-tab>") 'tabbar-forward)
+          (global-set-key (kbd "<C-iso-lefttab>") 'tabbar-backward)
+        ;; Better Buffer cycling
+          (global-set-key (kbd "C-o") 'other-window)
         ;; Select semantic unit
           (global-set-key (kbd "M-n") 'er/expand-region)
           (global-set-key (kbd "M-m") 'er/contract-region)

@@ -21,6 +21,6 @@
 ;;   #b00000000])
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
-
+(set-face-attribute 'linum nil :background "#2a2a2a" :foreground "white")
 (tabbar-mode 1)
 (provide 'init-gui)
