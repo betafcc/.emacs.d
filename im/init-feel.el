@@ -31,6 +31,28 @@
            (interactive "*p")
            (move-text-internal (- arg)))
 
+        ;; TODO make case for unselected
+        (defun move-by-one (arg)
+          (if (or (and (= (max (point) (mark)) (point-max)) (> arg 0))
+        	  (and (= (min (point) (mark)) (point-min)) (< arg 0)))
+              (message "limit reached")
+            (cond
+             ((and mark-active transient-mark-mode)
+              (let ((change? (< (point) (mark))) (text (delete-and-extract-region (point) (mark))))
+        	(forward-char arg)
+        	(set-mark (point))
+        	(insert text)
+        	(when change? (exchange-point-and-mark))
+        	(setq deactivate-mark nil))))))
+        
+        (defun move-text-forward (arg)
+          (interactive "*p")
+          (move-by-one arg))
+        
+        (defun move-text-backward (arg)
+          (interactive "*p")
+          (move-by-one (- arg)))
+
         ;; select region by semantic unit
         (require 'expand-region)
 ;; end basic feel
@@ -187,6 +209,9 @@
         ;; Move lines
           (global-set-key (kbd "<M-up>") 'move-text-up)
           (global-set-key (kbd "<M-down>") 'move-text-down)
+          (global-set-key (kbd "<M-right>") 'move-text-forward)
+          (global-set-key (kbd "<M-left>")  'move-text-backward)
+
         ;; Select semantic unit
           (global-set-key (kbd "M-n") 'er/expand-region)
           (global-set-key (kbd "M-m") 'er/contract-region)
