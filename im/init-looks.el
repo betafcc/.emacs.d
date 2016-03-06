@@ -9,7 +9,7 @@
     (setq linum-format "%4d \u2502")
     (require 'linum-off)
     (set-face-attribute 'linum nil :background "#2a2a2a" :foreground "#a5a5a5")
-
+    ;;(global-visual-line-mode t)
    ;;cursor
      (setq-default cursor-type 'bar)
      (set-cursor-color "#bb4444")
