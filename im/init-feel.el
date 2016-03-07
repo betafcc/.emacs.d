@@ -1,3 +1,7 @@
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+
+
 ;; basic Feel
         ;; move selected lines like in sublime
         (defun move-text-internal (arg)
