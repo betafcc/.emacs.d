@@ -41,7 +41,7 @@
               ;;(set-face-attribute 'mode-line nil :background "#ef2929" :foreground "#ffffff")
 ;; (set-face-attribute 'minibuffer-prompt nil :foreground "#a40000" :background "#ffafaf")
 ;;             
-        (set-face-attribute 'mode-line nil :background "brightred" :foreground "#eeeeee")
+        (set-face-attribute 'mode-line nil :background "brightred" :foreground "white")
         (set-face-attribute 'mode-line-buffer-id nil :foreground "orange1" )
         (set-face-attribute 'mode-line-inactive nil :background "#333333" :foreground "gray50" :box nil)
         (set-face-attribute 'powerline-active1 nil :background "#333333" :foreground "SpringGreen3")

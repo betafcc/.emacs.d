@@ -28,7 +28,7 @@
 (setq tabbar-ruler-fancy-tab-separator 'round)
 (setq tabbar-ruler-style 'firefox)
 (require 'tabbar-ruler)
-(set-face-attribute 'mode-line nil :background "#2a2a2a" :foreground "#eeeeee")
+(set-face-attribute 'mode-line nil :background "#2a2a2a")
 
 
 ;; TODO fix tabbar color
