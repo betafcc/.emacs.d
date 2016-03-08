@@ -7,9 +7,16 @@
 ;;;; basic Look
   ;; customize linum
     (global-linum-mode 1)
-    (setq linum-format "%4d \u2502")
+    ;; (setq linum-format "%4d \u2502")
+    (setq linum-format "%4d  ")
     (require 'linum-off)
     (set-face-attribute 'linum nil :background "#2a2a2a" :foreground "#a5a5a5")
+    (require 'hlinum)
+    (hlinum-activate)
+    (set-face-attribute 'linum-highlight-face nil
+			:weight 'bold
+			:background "brightred"
+			:foreground "white")
     ;;(global-visual-line-mode t)
    ;;cursor
      (setq-default cursor-type 'bar)

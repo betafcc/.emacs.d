@@ -1,6 +1,6 @@
 
 
-(setq linum-format "%4d ")
+(setq linum-format "%4d  ")
 ;;(define-fringe-bitmap 'right-curly-arrow
 ;;  [#b00000000
 ;;   #b00000000
@@ -22,7 +22,14 @@
 
 
 (blink-cursor-mode 0)
-(set-face-attribute 'linum nil :background "#2a2a2a" :foreground "white")
+(set-face-attribute 'linum nil
+		    :weight 'light
+		    :background "#2a2a2a"
+		    :foreground "gray75")
+(set-face-attribute 'linum-highlight-face nil
+		        :weight 'bold
+			:background "firebrick2"
+			:foreground "white")
 (setq tabbar-ruler-use-mode-icons t)
 (setq tabbar-ruler-fancy-tab-separator 'round)
 (setq tabbar-ruler-style 'firefox)
