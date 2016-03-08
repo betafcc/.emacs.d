@@ -29,7 +29,7 @@
 (setq tabbar-ruler-style 'firefox)
 (require 'tabbar-ruler)
 (set-face-attribute 'mode-line nil :background "#2a2a2a")
-
+(set-face-attribute 'mode-line-inactive nil :background "#444444")
 
 ;; TODO fix tabbar color
 ;;(require 'tabbar)
