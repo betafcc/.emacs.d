@@ -170,6 +170,37 @@
         (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 ;; end helm settings
 
+;; org settings
+        ;; set key for agenda
+        (global-set-key (kbd "C-c a") 'org-agenda)
+        
+        ;;file to save todo items
+        (setq org-agenda-files (quote ("~/workspace/todo/org/todo.org")))
+        
+        ;;set priority range from A to C with default A
+        (setq org-highest-priority ?A)
+        (setq org-lowest-priority ?C)
+        (setq org-default-priority ?A)
+        
+        ;;set colours for priorities
+        (setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+                                   (?B . (:foreground "LightSteelBlue"))
+                                   (?C . (:foreground "OliveDrab"))))
+        
+        ;;open agenda in current window
+        (setq org-agenda-window-setup (quote current-window))
+        
+        ;;capture todo items using C-c c t
+        (define-key global-map (kbd "C-c c") 'org-capture)
+        (setq org-capture-templates
+              '(("t" "todo" entry (file+headline "~/workspace/todo/org/todo.org" "Tasks")
+                 "* TODO [#A] %?")))
+        
+        (provide 'init-org)
+        
+;; end org settings
+
+
 ;; navigation tree
        (require 'neotree)
 ;; end navigation tree
@@ -193,14 +224,22 @@
         ;;(require 'mark-multiple)
 ;; end multiple cursors
         
-        ;; Edit string rectangles inline.
-        ;; (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+;; aling command
+        ;; Align with spaces only
+          (defadvice align-regexp (around align-regexp-with-spaces)
+            "Never use tabs for alignment."
+            (let ((indent-tabs-mode nil))
+              ad-do-it))
+        (ad-activate 'align-regexp)
+        (global-set-key (kbd "C-x |") 'align-regexp)
+;; end align command
 
 ;; custom registers
         (set-register ?i (cons 'file "~/.emacs.d/init.el"))
         (set-register ?r (cons 'file "~/.emacs.d/im/init-resets.el"))
         (set-register ?l (cons 'file "~/.emacs.d/im/init-looks.el"))
         (set-register ?f (cons 'file "~/.emacs.d/im/init-feel.el"))
+        (set-register ?t (cons 'file "~/workspace/todo/org/todo.org"))
 ;; end custom registers
 
 

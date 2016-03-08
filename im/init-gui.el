@@ -21,7 +21,6 @@
 ;;   #b00000000])
 
 
-(scroll-bar-mode -1)
 (blink-cursor-mode 0)
 (set-face-attribute 'linum nil :background "#2a2a2a" :foreground "white")
 (setq tabbar-ruler-use-mode-icons t)
