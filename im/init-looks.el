@@ -26,6 +26,10 @@
    ;; more contrast for selected region
      (set-face-attribute 'region nil :background "#555" )
 
+   ;; windows divider
+   ;; TODO: make it thinner
+   (set-face-attribute 'vertical-border nil :background "gray20" :foreground "gray20" :width 'wide)
+
    (fringe-mode '(4 . 4))
    (set-face-attribute 'fringe nil
                    :foreground "gray20"
@@ -65,6 +69,7 @@
         ;;(sml/setup)
 
 ;; end powerline
+
 
 
 (provide 'init-looks)
