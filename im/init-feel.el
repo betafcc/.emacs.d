@@ -59,6 +59,7 @@
 
         ;; select region by semantic unit
         (require 'expand-region)
+
 ;; end basic feel
 
 

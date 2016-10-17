@@ -29,7 +29,8 @@
 
 (eval-after-load 'haskell-mode '(require 'init-haskell))
 (eval-after-load 'racket-mode '(require 'init-racket))
-
+(eval-after-load 'php-mode '(require 'init-php))
+(eval-after-load 'js2-mode '(require 'init-js))
 
 (provide 'init)
 (custom-set-variables
@@ -40,7 +41,7 @@
  '(company-ghc-show-info t)
  '(package-selected-packages
    (quote
-    (hlinum undo-tree tabbar-ruler smartparens smart-mode-line-powerline-theme racket-mode neotree multiple-cursors hindent helm expand-region company-ghci company-ghc))))
+    (ac-php json-mode js2-mode web-mode hlinum undo-tree tabbar-ruler smartparens smart-mode-line-powerline-theme racket-mode neotree multiple-cursors hindent helm expand-region company-ghci company-ghc))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -39,6 +39,10 @@
         ;;; Don't save *anything*
         (setq compilation-save-buffers-predicate '(lambda () nil))
 
+
+        ;; Redirect auto mode load
+        (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)) 
+
 ;; end feels resets
 
 (provide 'init-resets)
