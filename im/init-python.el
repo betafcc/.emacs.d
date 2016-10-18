@@ -1,6 +1,6 @@
 ;; TODO
 ;; Generalize build system
-;; this file here should only (add-hook 'js2-mode-hook (lambda () (setq eval-command "node")))
+;; this file here should only (add-hook 'js2-mode-hook (lambda () (setq eval-command "node"))))
 
 ;; TODO
 ;; Comment region change keybind
@@ -15,8 +15,8 @@
 ;;    (shell-eval-buffer "node")))
 
 
-(add-hook 'js2-mode-hook
+(add-hook 'python-mode-hook
 	  (lambda () 
-	    (setq build-command "node")))
+	    (setq build-command "python3.6")))
 
-(provide 'init-js)
+(provide 'init-python)
