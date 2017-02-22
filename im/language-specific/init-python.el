@@ -15,7 +15,7 @@
 ;;    (shell-eval-buffer "node")))
 
 
-(add-hook 'python-mode-hook
+(add-hook 'python-mode-hook ;; WHY THE FUCK THIS HOOK DOESNT WORK???
 	  (lambda () 
 	    (setq build-command "python3.6")))
 

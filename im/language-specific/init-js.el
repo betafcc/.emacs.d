@@ -19,4 +19,6 @@
 	  (lambda () 
 	    (setq build-command "node")))
 
+(setq js2-mode-show-parse-errors nil)
+
 (provide 'init-js)
