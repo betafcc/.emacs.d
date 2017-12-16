@@ -1,8 +1,9 @@
 (require 'powerline)
+(require 'moe-theme)
+
 (powerline-default-theme)
 
-
-(require 'moe-theme)
+(set-cursor-color "#bb4444")
 
 (setq moe-theme-highlight-buffer-id t)
 
