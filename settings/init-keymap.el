@@ -49,7 +49,7 @@
 ;; Better Buffer cycling
 (global-set-key   (kbd "C-o")             'other-window)
 ;; force complete
-(global-set-key   (kbd "C-p")             'company-complete)
+(global-set-key   (kbd "C-x C-p")             'company-complete)
 ;; fix terminal key redo for undo tree
 (global-set-key   (kbd "M-/")             'undo-tree-redo)
 ;; Tree view
