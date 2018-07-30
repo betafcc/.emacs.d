@@ -51,8 +51,8 @@
 (set-face-attribute 'powerline-active2 nil
                     :background "#ffdddd"
                     :foreground "#cc0000")
-;;    
-;;    
+;;
+;;
 (set-face-attribute 'powerline-inactive1 nil
                     :background "white"
                     :foreground "white")

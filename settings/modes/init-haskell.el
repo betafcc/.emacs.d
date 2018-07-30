@@ -1,6 +1,6 @@
 (require 'company)
 
-(add-to-list 'company-backends 'company-ghc)
+;; (add-to-list 'company-backends 'company-ghc)
 
 (setq haskell-process-type 'stack-ghci)
 (setq company-ghc-show-info t)

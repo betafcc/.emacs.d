@@ -9,7 +9,7 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-(require 'init-packages)
+(require 'init-melpa)
 (require 'init-requires)
 (require 'init-misc)
 (require 'init-resets)
