@@ -34,10 +34,10 @@
 (global-set-key   (kbd "M-;")             'comment-line-stay)
 (global-set-key   (kbd "C-x M-;")         'comment-dwim)
 ;; Tiling keys
-(global-set-key   (kbd "<C-S-down>")      'shrink-window)
-(global-set-key   (kbd "<C-S-up>")        'enlarge-window)
-(global-set-key   (kbd "<C-S-left>")      'shrink-window-horizontally)
-(global-set-key   (kbd "<C-S-right>")     'enlarge-window-horizontally)
+(global-set-key   (kbd "<C-M-down>")      'shrink-window)
+(global-set-key   (kbd "<C-M-up>")        'enlarge-window)
+(global-set-key   (kbd "<C-M-left>")      'shrink-window-horizontally)
+(global-set-key   (kbd "<C-M-right>")     'enlarge-window-horizontally)
 ;; Move lines
 (global-set-key   (kbd "<M-up>")          'move-text-up)
 (global-set-key   (kbd "<M-down>")        'move-text-down)
