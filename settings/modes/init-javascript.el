@@ -1,3 +1,3 @@
-(setq js-indent-mode 2)
+(setq js-indent-level 2)
 
 (provide 'init-javascript)

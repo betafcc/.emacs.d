@@ -8,7 +8,14 @@
 (setq c-default-style "python"
       c-basic-offset 4)
 
-(setq-default python-shell-interpreter "python3")
+;; EMACS IS HORRIBLE WITH IT'S
+;; "SMART" TAB AND INDENTATION
+;; this just disables it
+(setq indent-line-function 'insert-tab)
+(electric-indent-mode -1)
+;; Use (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1))) to override the electric-indent-mode state set by any major mode.
+
+(setq-default python-shell-interpreter "python")
 (setq-default python-shell-completion-native-enable nil)
 
 
