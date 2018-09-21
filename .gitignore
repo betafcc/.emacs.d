@@ -1,4 +1,11 @@
-auto-save-list/
-backups/
-elpa/
-*~
+*.html
+*.eld
+*.dat
+*ido*
+*.html
+*.pdf
+*.tex
+
+config.el
+auto-save-list
+elpa

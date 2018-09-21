@@ -1,3 +1,15 @@
+* packages
+
+** melpa
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+#+END_SRC
+
+* variables for modes
+
+#+BEGIN_SRC emacs-lisp
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -7,10 +19,29 @@
 (display-time-mode 1)
 (display-battery-mode 1)
 (setq column-number-mode t)
+(global-hl-line-mode 1)
+#+END_SRC
 
+
+** ido
+
+*** description
+  Interactive DO.
+
+*** codes
+
+#+BEGIN_SRC emacs-lisp
 (ido-mode 1)
 (setq ido-everywhere t)
 (setq ido-enable-flex-matching t)
 (setq ido-use-filename-at-point 'guess)
 (setq ido-create-new-buffer 'always)
 (setq ido-file-extension-order '(".org" ".txt" ".csv"))
+#+END_SRC
+
+
+* installed packages
+
+** ido describe binding
+
+** ido grid mode
