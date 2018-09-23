@@ -11,8 +11,10 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-
 (global-hl-line-mode 1)
+;; solves uggly modeline underline
+;; https://github.com/bbatsov/solarized-emacs/issues/187
+(setq x-underline-at-descent-line t)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -26,7 +28,6 @@
 (display-battery-mode 1)
 (setq column-number-mode t)
 
-
 (use-package which-key
   :ensure t
   :init
@@ -35,7 +36,8 @@
 (use-package solarized-theme
   :ensure t
   :config
-  (load-theme 'solarized-light t))
+  (load-theme 'solarized-light t)
+  )
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
