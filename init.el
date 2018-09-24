@@ -38,8 +38,21 @@
 (setq scroll-conservatively 100)
 (setq ring-bell-function 'ignore)
 
+;; emacs treats camelCase as single word, this fixes it
+(global-subword-mode 1)
+
 (show-paren-mode 1)
+(setq electric-pair-pairs '(
+                           (?\{ . ?\})
+                           (?\( . ?\))
+                           (?\[ . ?\])
+                           (?\" . ?\")
+                           ))
+(electric-pair-mode t)
+
+
 (global-prettify-symbols-mode t)
+
 
 (use-package which-key
   :ensure t
