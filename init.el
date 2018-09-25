@@ -11,7 +11,6 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(global-hl-line-mode 1)
 ;; solves uggly modeline underline
 ;; https://github.com/bbatsov/solarized-emacs/issues/187
 (setq x-underline-at-descent-line t)
@@ -63,12 +62,24 @@
   :ensure t
   :init (load-theme 'solarized-light t))
 
+
+;; cursor stuff
+(global-hl-line-mode 1)
+(blink-cursor-mode -1)
+(setq-default cursor-type '(bar . 3))
+(set-cursor-color "#ff8676")
+
 (use-package beacon
   :ensure t
   :init
   (beacon-mode 1)
   :config
-  (setq beacon-color "#F8A53A"))
+  (setq beacon-color "#f8a53a"))
+
+(use-package centered-cursor-mode
+  :ensure t
+  :bind ("C-M-l" . 'centered-cursor-mode))
+
 
 (use-package rainbow-mode
   :ensure t
