@@ -50,7 +50,7 @@
 (electric-pair-mode t)
 
 
-(global-prettify-symbols-mode t)
+;; (global-prettify-symbols-mode t)
 
 
 (use-package which-key
@@ -58,10 +58,15 @@
   :init
   (which-key-mode))
 
+
 (use-package solarized-theme
   :ensure t
-  :init (load-theme 'solarized-light t))
-
+  :init
+  (setq solarized-distinct-fringe-background t)
+  (setq solarized-high-contrast-mode-line t)
+  (setq solarized-use-more-italic t)
+  (setq solarized-scale-org-headlines t)
+  (load-theme 'solarized-light t))
 
 ;; cursor stuff
 (global-hl-line-mode 1)
@@ -94,6 +99,34 @@
     (if window-system
       (fancy-battery-mode)
       (display-battery-mode)))
+
+
+
+(use-package org
+  :mode ("\\.org\\'"  . org-mode)
+  :config
+  (setq org-ellipsis "▼"))
+
+
+(use-package org-indent
+  :hook (org-mode . org-indent-mode))
+
+(use-package org-bullets
+  :ensure t
+  :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
+
+(use-package ob
+  :defer t
+  :config
+  (setq org-confirm-babel-evaluate nil)  ; don't prompt me to confirm everytime I want to evaluate a block
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (shell . t)
+     (js . t))))
+
 
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
