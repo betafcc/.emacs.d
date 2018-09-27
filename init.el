@@ -41,12 +41,12 @@
 (global-subword-mode 1)
 
 (show-paren-mode 1)
-(setq electric-pair-pairs '(
-                           (?\{ . ?\})
-                           (?\( . ?\))
-                           (?\[ . ?\])
-                           (?\" . ?\")
-                           ))
+(setq electric-pair-pairs
+      '((?\{ . ?\})
+        (?\( . ?\))
+        (?\[ . ?\])
+        (?\" . ?\")
+        ))
 (electric-pair-mode t)
 
 
@@ -58,6 +58,10 @@
   :init
   (which-key-mode))
 
+(use-package xclip
+  :ensure t
+  :init
+  (xclip-mode 1))
 
 (use-package solarized-theme
   :ensure t
@@ -100,8 +104,6 @@
       (fancy-battery-mode)
       (display-battery-mode)))
 
-
-
 (use-package org
   :mode ("\\.org\\'"  . org-mode)
   :config
@@ -119,15 +121,12 @@
 (use-package ob
   :defer t
   :config
-  (setq org-confirm-babel-evaluate nil)  ; don't prompt me to confirm everytime I want to evaluate a block
-
+  (setq org-confirm-babel-evaluate nil)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
      (shell . t)
      (js . t))))
-
-
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
