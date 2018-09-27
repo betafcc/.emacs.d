@@ -73,10 +73,13 @@
   (load-theme 'solarized-light t))
 
 ;; cursor stuff
+;; TODO: fix cursor color when launching from daemon
+;; https://emacs.stackexchange.com/questions/13291
 (global-hl-line-mode 1)
 (blink-cursor-mode -1)
 (setq-default cursor-type '(bar . 3))
 (set-cursor-color "#ff8676")
+
 
 (use-package beacon
   :ensure t
@@ -127,6 +130,9 @@
    '((python . t)
      (shell . t)
      (js . t))))
+
+;; TODO: add a keybinding to it maybe?
+;; (add-to-list 'default-frame-alist '(undecorated . t))
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
