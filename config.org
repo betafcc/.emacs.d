@@ -14,8 +14,6 @@
 #+END_SRC
 
 ** Theme
-Light solarized, in sync with my kitty config
-
 #+BEGIN_SRC emacs-lisp
   (use-package solarized-theme
     :ensure t
@@ -24,13 +22,17 @@ Light solarized, in sync with my kitty config
     (setq solarized-high-contrast-mode-line t)
     (setq solarized-use-more-italic t)
     (setq solarized-scale-org-headlines t)
+    :config
     (load-theme 'solarized-light t))
 #+END_SRC
 
+Light solarized, in sync with my kitty and kitsune config
+
 ** Cursor looks
 
-*** TODO [0/1]:
+*** TODO [0/2]:
 - [ ] [[https://emacs.stackexchange.com/questions/13291][fix cursor color when launching from daemon]]
+- [ ] [[https://github.com/tonsky/FiraCode/wiki/Emacs-instructions][set fira code pretty-symbols ligatures]]
 
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode 1)
@@ -47,12 +49,16 @@ Light solarized, in sync with my kitty config
 #+END_SRC
 
 
-* Rest
+* Global Feels
+
+** Resets
 
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-splash-screen t)
   (setq make-backup-files nil)
   (setq auto-save-default nil)
+  (setq scroll-conservatively 100)
+  (setq ring-bell-function 'ignore)
   (defalias 'yes-or-no-p 'y-or-n-p)
 
   (display-time-mode 1)
@@ -64,9 +70,11 @@ Light solarized, in sync with my kitty config
   (ad-activate 'ansi-term)
 
   (global-set-key (kbd "<C-S-return>") 'ansi-term)
+#+END_SRC
 
-  (setq scroll-conservatively 100)
-  (setq ring-bell-function 'ignore)
+* Rest
+
+#+BEGIN_SRC emacs-lisp
 
   ;; emacs treats camelCase as single word, this fixes it
   (global-subword-mode 1)
@@ -81,7 +89,7 @@ Light solarized, in sync with my kitty config
   (electric-pair-mode t)
 
 
-  ;; (global-prettify-symbols-mode t)
+
 
 
   (use-package which-key
@@ -129,16 +137,21 @@ Light solarized, in sync with my kitty config
       (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
 
   (use-package ob
+    :no-require
     :defer t
     :config
     (setq org-confirm-babel-evaluate nil)
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((python . t)
-       (shell . t)
-       (js . t))))
+     '((python     . t)
+       (emacs-lisp . t)
+       (shell      . t)
+       (js         . t))))
 
   ;; TODO: add a keybinding to it maybe?
+  ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25408#77
+  ;; (set-frame-parameter nil 'undecorated t)
   ;; (add-to-list 'default-frame-alist '(undecorated . t))
 
 #+END_SRC
+
