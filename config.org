@@ -57,11 +57,23 @@ Light solarized, in sync with my kitty and kitsune config
   (setq inhibit-splash-screen t)
   (setq make-backup-files nil)
   (setq auto-save-default nil)
-  (setq scroll-conservatively 100)
   (setq ring-bell-function 'ignore)
-  (defalias 'yes-or-no-p 'y-or-n-p)
   (setq column-number-mode t)
 #+END_SRC
+
+Don't need to type full 'yes' or 'no' for confirmation
+
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+Don't jump when scrolling with cursor
+
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-conservatively 100)
+#+END_SRC
+
+** Terminal
 
 Call Bash with same keybinding as kitty
 
@@ -73,6 +85,44 @@ Call Bash with same keybinding as kitty
 
   (global-set-key (kbd "<C-S-return>") 'ansi-term)
 #+END_SRC
+
+** Modes
+
+Show keybind help
+
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode))
+#+END_SRC
+
+Share kill ring with x applications
+
+#+BEGIN_SRC emacs-lisp
+  (use-package xclip
+    :ensure t
+    :init
+    (xclip-mode 1))
+#+END_SRC
+
+Toggle fixed cursor on center with "C-M-l"
+
+#+BEGIN_SRC emacs-lisp
+  (use-package centered-cursor-mode
+    :ensure t
+    :bind ("C-M-l" . 'centered-cursor-mode))
+#+END_SRC
+
+Show colors automatically
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode
+    :ensure t
+    :hook prog-mode)
+#+END_SRC
+
+** Misc editing
 
 Emacs treats camelCase as single word, this fixes it
 
@@ -92,7 +142,6 @@ Auto block pairs stuff
           ))
   (electric-pair-mode t)
 #+END_SRC
-
 
 * Org
 
@@ -137,44 +186,11 @@ Babel stuff
        (js         . t))))
 #+END_SRC
 
-
-* Rest
+* Misc
 #+BEGIN_SRC emacs-lisp
-  (use-package which-key
-    :ensure t
-    :init
-    (which-key-mode))
-
-  (use-package xclip
-    :ensure t
-    :init
-    (xclip-mode 1))
-
-
-  (use-package centered-cursor-mode
-    :ensure t
-    :bind ("C-M-l" . 'centered-cursor-mode))
-
-
-  (use-package rainbow-mode
-    :ensure t
-    :init
-      (add-hook 'prog-mode-hook 'rainbow-mode))
-
-  (use-package fancy-battery
-    :ensure t
-    :config
-      (setq fancy-battery-show-percentage t)
-      (setq battery-update-interval 15)
-      (if window-system
-        (fancy-battery-mode)
-        (display-battery-mode)))
-
-
   ;; TODO: add a keybinding to it maybe?
   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25408#77
   ;; (set-frame-parameter nil 'undecorated t)
   ;; (add-to-list 'default-frame-alist '(undecorated . t))
-
 #+END_SRC
 
