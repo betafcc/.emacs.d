@@ -80,6 +80,7 @@ Call Bash with same keybinding as kitty
 
 #+BEGIN_SRC emacs-lisp
   (use-package ansi-term
+    :no-require t
     :bind ("<C-S-return>" . ansi-term)
     :init
     (defvar my-term-shell "/bin/bash")
