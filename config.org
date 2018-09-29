@@ -1,3 +1,9 @@
+* TODO [0/3]
+- [ ] Add my old region moving keybindings
+- [ ] Add M-n, M-p similar to purcell
+- [ ] paredit
+
+
 * Looks
 
 ** Resets
@@ -146,6 +152,7 @@ Auto block pairs stuff
   (electric-pair-mode t)
 #+END_SRC
 
+
 * Org
 
 Better 'unfold' symbol
@@ -189,11 +196,60 @@ Babel stuff
        (js         . t))))
 #+END_SRC
 
+
 * Misc
 #+BEGIN_SRC emacs-lisp
-  ;; TODO: add a keybinding to it maybe?
+  ;; modeline on top?
+  ;; (setq-default header-line-format mode-line-format)
+  ;; (setq-default mode-line-format nil)
+
+  ;; TODO: add a keybinding to remove gui decorations maybe?
   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25408#77
   ;; (set-frame-parameter nil 'undecorated t)
   ;; (add-to-list 'default-frame-alist '(undecorated . t))
+  ;; (setq initial-frame-alist
+  ;;       '((left . 1) (minibuffer . nil)
+  ;;         ;; You'll need to adjust the following 3 numbers.
+  ;;         (top . 75) ; In pixels
+  ;;         (width . 127) ; In chars
+  ;;         (height . 31)))
+
+  ;; TODO: How to put the minibuffer on top?
+
+  ;; (setq minibuffer-frame-alist
+  ;;       '((top . 1) (left . 1) (height . 2)
+  ;;         ;; You'll need to adjust the following number.
+  ;;         (width . 127)))
+  ;; (setq default-minibuffer-frame
+  ;;       (make-frame
+  ;;        '((name . "minibuffer")
+  ;;          (width . 80)
+  ;;          (height . 1)
+  ;;          (minibuffer . only)
+  ;;          (top . 0)
+  ;;          (left . 0)
+  ;;          )))
+  ;; (setq new-frame
+  ;;       (make-frame
+  ;;        '((name . "editor")
+  ;;          (width . 80)
+  ;;          (height . 30)
+  ;;          (minibuffer . nil)
+  ;;          (top . 50)
+  ;;          (left . 0)
+  ;;          )))
+
+  ;; (setq default-minibuffer-frame
+  ;;       (make-frame
+  ;;        '((name . "minibuffer")
+  ;;          (width . 20)
+  ;;          (height . 80)
+  ;;          (minibuffer . only)
+  ;;          (top . 0)
+  ;;          (right . 0)
+  ;;          )))
+  ;; (setq-default mode-line-format nil)
 #+END_SRC
+
+#+RESULTS:
 
