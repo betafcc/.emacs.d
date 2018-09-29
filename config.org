@@ -3,7 +3,6 @@
 - [ ] Add M-n, M-p similar to purcell
 - [ ] paredit
 
-
 * Looks
 
 ** Resets
@@ -152,6 +151,13 @@ Auto block pairs stuff
   (electric-pair-mode t)
 #+END_SRC
 
+** Revert Buffer
+
+Update buffer from disk on <f5>
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f5>") '(lambda () (interactive) (revert-buffer t t)))
+#+END_SRC
 
 * Org
 
@@ -176,8 +182,7 @@ Pretty bullets
 #+BEGIN_SRC emacs-lisp
   (use-package org-bullets
     :ensure t
-    :config
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
+    :hook (org-mode . org-bullets-mode))
 #+END_SRC
 
 Babel stuff
