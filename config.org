@@ -60,10 +60,12 @@ Light solarized, in sync with my kitty and kitsune config
   (setq scroll-conservatively 100)
   (setq ring-bell-function 'ignore)
   (defalias 'yes-or-no-p 'y-or-n-p)
-
-  (display-time-mode 1)
   (setq column-number-mode t)
+#+END_SRC
 
+Call Bash with same keybinding as kitty
+
+#+BEGIN_SRC emacs-lisp
   (defvar my-term-shell "/bin/bash")
   (defadvice ansi-term (before force-bash)
     (interactive (list my-term-shell)))
@@ -72,13 +74,15 @@ Light solarized, in sync with my kitty and kitsune config
   (global-set-key (kbd "<C-S-return>") 'ansi-term)
 #+END_SRC
 
-* Rest
+Emacs treats camelCase as single word, this fixes it
 
 #+BEGIN_SRC emacs-lisp
-
-  ;; emacs treats camelCase as single word, this fixes it
   (global-subword-mode 1)
+#+END_SRC
 
+Auto block pairs stuff
+
+#+BEGIN_SRC emacs-lisp
   (show-paren-mode 1)
   (setq electric-pair-pairs
         '((?\{ . ?\})
@@ -87,11 +91,55 @@ Light solarized, in sync with my kitty and kitsune config
           (?\" . ?\")
           ))
   (electric-pair-mode t)
+#+END_SRC
 
 
+* Org
+
+Better 'unfold' symbol
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :mode ("\\.org\\'"  . org-mode)
+    :config
+    (setq org-ellipsis "▼"))
+#+END_SRC
+
+Visual indentation
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-indent
+    :hook (org-mode . org-indent-mode))
+#+END_SRC
+
+Pretty bullets
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
+#+END_SRC
+
+Babel stuff
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ob
+    :no-require
+    :defer t
+    :config
+    (setq org-confirm-babel-evaluate nil)
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((python     . t)
+       (emacs-lisp . t)
+       (shell      . t)
+       (js         . t))))
+#+END_SRC
 
 
-
+* Rest
+#+BEGIN_SRC emacs-lisp
   (use-package which-key
     :ensure t
     :init
@@ -122,31 +170,6 @@ Light solarized, in sync with my kitty and kitsune config
         (fancy-battery-mode)
         (display-battery-mode)))
 
-  (use-package org
-    :mode ("\\.org\\'"  . org-mode)
-    :config
-    (setq org-ellipsis "▼"))
-
-
-  (use-package org-indent
-    :hook (org-mode . org-indent-mode))
-
-  (use-package org-bullets
-    :ensure t
-    :config
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
-
-  (use-package ob
-    :no-require
-    :defer t
-    :config
-    (setq org-confirm-babel-evaluate nil)
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((python     . t)
-       (emacs-lisp . t)
-       (shell      . t)
-       (js         . t))))
 
   ;; TODO: add a keybinding to it maybe?
   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25408#77
