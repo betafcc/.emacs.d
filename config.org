@@ -21,10 +21,10 @@ Light solarized, in sync with my kitty and kitsune config
   (use-package solarized-theme
     :ensure t
     :init
-    (setq solarized-distinct-fringe-background t)
-    (setq solarized-high-contrast-mode-line t)
-    (setq solarized-use-more-italic t)
-    (setq solarized-scale-org-headlines t)
+    (setq solarized-distinct-fringe-background t
+          solarized-high-contrast-mode-line t
+          solarized-use-more-italic t
+          solarized-scale-org-headlines t)
     :config
     (load-theme 'solarized-light t))
 #+END_SRC
@@ -55,11 +55,11 @@ Light solarized, in sync with my kitty and kitsune config
 ** Resets
 
 #+BEGIN_SRC emacs-lisp
-  (setq inhibit-splash-screen t)
-  (setq make-backup-files nil)
-  (setq auto-save-default nil)
-  (setq ring-bell-function 'ignore)
-  (setq column-number-mode t)
+  (setq inhibit-splash-screen t
+        make-backup-files     nil
+        auto-save-default     nil
+        ring-bell-function    'ignore
+        column-number-mode    t)
 #+END_SRC
 
 Don't need to type full 'yes' or 'no' for confirmation
