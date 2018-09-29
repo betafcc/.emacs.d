@@ -14,6 +14,9 @@
 #+END_SRC
 
 ** Theme
+
+Light solarized, in sync with my kitty and kitsune config
+
 #+BEGIN_SRC emacs-lisp
   (use-package solarized-theme
     :ensure t
@@ -25,8 +28,6 @@
     :config
     (load-theme 'solarized-light t))
 #+END_SRC
-
-Light solarized, in sync with my kitty and kitsune config
 
 ** Cursor looks
 
@@ -78,12 +79,13 @@ Don't jump when scrolling with cursor
 Call Bash with same keybinding as kitty
 
 #+BEGIN_SRC emacs-lisp
-  (defvar my-term-shell "/bin/bash")
-  (defadvice ansi-term (before force-bash)
-    (interactive (list my-term-shell)))
-  (ad-activate 'ansi-term)
-
-  (global-set-key (kbd "<C-S-return>") 'ansi-term)
+  (use-package ansi-term
+    :bind ("<C-S-return>" . ansi-term)
+    :init
+    (defvar my-term-shell "/bin/bash")
+    (defadvice ansi-term (before force-bash)
+      (interactive (list my-term-shell)))
+    (ad-activate 'ansi-term))
 #+END_SRC
 
 ** Modes
