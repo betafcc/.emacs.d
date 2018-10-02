@@ -1,6 +1,5 @@
 * TODO [0/3]
 - [ ] Add my old region moving keybindings
-- [ ] Add M-n, M-p similar to purcell
 - [ ] paredit
 
 * Looks
@@ -502,7 +501,6 @@ Using Wiegley config for now
 - [ ] change swiper prompt (now is "Swipper")
 
 
-
 * Dash
 
 #+BEGIN_SRC emacs-lisp
@@ -519,7 +517,6 @@ Using Wiegley config for now
   (use-package elm-mode
     :ensure t)
 #+END_SRC
-
 
 * Misc
 #+BEGIN_SRC emacs-lisp
