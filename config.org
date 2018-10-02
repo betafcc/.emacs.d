@@ -178,6 +178,112 @@ From UncleDave
   (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 #+END_SRC
 
+** Whitespace
+#+BEGIN_SRC emacs-lisp
+  (setq-default show-trailing-whitespace t)
+
+  (use-package whitespace
+    :diminish (global-whitespace-mode
+               whitespace-mode
+               whitespace-newline-mode)
+    :commands (whitespace-buffer
+               whitespace-cleanup
+               whitespace-mode
+               whitespace-turn-off)
+    :preface
+    (defvar normalize-hook nil)
+
+    (defun normalize-file ()
+      (interactive)
+      (save-excursion
+        (goto-char (point-min))
+        (whitespace-cleanup)
+        (run-hook-with-args normalize-hook)
+        (delete-trailing-whitespace)
+        (goto-char (point-max))
+        (delete-blank-lines)
+        (set-buffer-file-coding-system 'unix)
+        (goto-char (point-min))
+        (while (re-search-forward "\r$" nil t)
+          (replace-match ""))
+        (set-buffer-file-coding-system 'utf-8)
+        (let ((require-final-newline t))
+          (save-buffer))))
+
+    (defun maybe-turn-on-whitespace ()
+      "depending on the file, maybe clean up whitespace."
+      (when (and (not (or (memq major-mode '(markdown-mode))
+                          (and buffer-file-name
+                               (string-match "\\(\\.texi\\|COMMIT_EDITMSG\\)\\'"
+                                             buffer-file-name))))
+                 (locate-dominating-file default-directory ".clean")
+                 (not (locate-dominating-file default-directory ".noclean")))
+        (whitespace-mode 1)
+        ;; For some reason, having these in settings.el gets ignored if
+        ;; whitespace loads lazily.
+        (setq whitespace-auto-cleanup t
+              whitespace-line-column 80
+              whitespace-rescan-timer-time nil
+              whitespace-silent t
+              whitespace-style '(face trailing lines space-before-tab empty))
+        (add-hook 'write-contents-hooks
+                  #'(lambda () (ignore (whitespace-cleanup))) nil t)
+        (whitespace-cleanup)))
+
+    :init
+    (add-hook 'find-file-hooks 'maybe-turn-on-whitespace t)
+
+    :config
+    (remove-hook 'find-file-hooks 'whitespace-buffer)
+    (remove-hook 'kill-buffer-hook 'whitespace-buffer))
+
+  (use-package whitespace-cleanup-mode
+    :defer 5
+    :diminish
+    :commands whitespace-cleanup-mode
+    :config
+    (global-whitespace-cleanup-mode 1))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;; Whitespace
+
+  ;; (defun sanityinc/no-trailing-whitespace ()
+  ;;   "Turn off display of trailing whitespace in this buffer."
+  ;;   (setq show-trailing-whitespace nil))
+
+  ;; ;; But don't show trailing whitespace in SQLi, inf-ruby etc.
+  ;; (dolist (hook '(special-mode-hook
+  ;;                 Info-mode-hook
+  ;;                 eww-mode-hook
+  ;;                 term-mode-hook
+  ;;                 comint-mode-hook
+  ;;                 compilation-mode-hook
+  ;;                 twittering-mode-hook
+  ;;                 minibuffer-setup-hook))
+  ;;   (add-hook hook #'sanityinc/no-trailing-whitespace))
+
+
+  ;; (require-package 'whitespace-cleanup-mode)
+  ;; (add-hook 'after-init-hook 'global-whitespace-cleanup-mode)
+  ;; (after-load 'whitespace-cleanup-mode
+  ;;   (diminish 'whitespace-cleanup-mode))
+
+  ;; (global-set-key [remap just-one-space] 'cycle-spacing)
+#+END_SRC
+** Symbol overlay
+
+#+BEGIN_SRC emacs-lisp
+  (use-package symbol-overlay
+    :diminish
+    :ensure t
+    :bind (("M-i" . symbol-overly-put)
+           ("M-n" . symbol-overlay-jump-next)
+           ("M-p" . symbol-overlay-jump-prev))
+    :config
+    (dolist (hook '(prog-mode-hook html-mode-hook yaml-mode-hook conf-mode-hook))
+      (add-hook hook 'symbol-overlay-mode)))
+#+END_SRC
+
 * Org
 
 Better 'unfold' symbol
@@ -334,7 +440,7 @@ Using Wiegley config for now
            ;; ("M-y"     . counsel-yank-pop)
 
            ("M-s f" . counsel-file-jump)
-           ;; ("M-s g" . counsel-rg)
+           ("M-s g" . counsel-rg)
            ("M-s j" . counsel-dired-jump))
     :commands counsel-minibuffer-history
     :init
@@ -379,15 +485,16 @@ Using Wiegley config for now
 
 
 #+BEGIN_SRC emacs-lisp
-(use-package swiper
-  :after ivy
-  :bind (:map swiper-map
-              ("M-y" . yank)
-              ("M-%" . swiper-query-replace)
-              ("C-." . swiper-avy)
-              ("M-c" . swiper-mc))
-  :bind (:map isearch-mode-map
-              ("C-o" . swiper-from-isearch)))
+  (use-package swiper
+    :after ivy
+    :bind (:map swiper-map
+                ("DEL" . delete-backward-char)
+                ("M-y" . yank)
+                ("M-%" . swiper-query-replace)
+                ("C-." . swiper-avy)
+                ("M-c" . swiper-mc))
+    :bind (:map isearch-mode-map
+                ("C-o" . swiper-from-isearch)))
 #+END_SRC
 
 
