@@ -237,7 +237,7 @@ Using Wiegley config for now
            ("M-H"   . ivy-resume))
 
     :bind (:map ivy-minibuffer-map
-;                ("<tab>" . ivy-alt-done)
+                ("<tab>" . ivy-partial-or-done)
                 ("<backtab>" . ivy-backward-kill-word)
                 ("SPC"   . ivy-alt-done-or-space)
                 ("C-d"   . ivy-done-or-delete-char)
@@ -373,6 +373,7 @@ Using Wiegley config for now
                 :caller 'counsel-recoll)))
 
   (use-package counsel-dash
+    :ensure t
     :bind ("C-c C-h" . counsel-dash))
 #+END_SRC
 
@@ -393,6 +394,15 @@ Using Wiegley config for now
 *** TODO [0/1]
 - [ ] change swiper prompt (now is "Swipper")
 
+
+
+* Dash
+
+#+BEGIN_SRC emacs-lisp
+#+END_SRC
+
+*** Todo [0/1]
+- [ ] Learn this shit
 
 * Misc
 #+BEGIN_SRC emacs-lisp
