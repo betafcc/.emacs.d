@@ -399,10 +399,20 @@ Using Wiegley config for now
 * Dash
 
 #+BEGIN_SRC emacs-lisp
+  (use-package dash
+    :ensure t)
 #+END_SRC
 
 *** Todo [0/1]
-- [ ] Learn this shit
+- [ ] Learn to use this shit
+
+* Elm
+
+#+BEGIN_SRC emacs-lisp
+  (use-package elm-mode
+    :ensure t)
+#+END_SRC
+
 
 * Misc
 #+BEGIN_SRC emacs-lisp
