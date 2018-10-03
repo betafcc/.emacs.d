@@ -4,7 +4,6 @@
 - [ ] M-n and M-p to move next/prev like region
 - [ ] always kill current buffer (stop asking me which one)
 - [ ] C-x C-b switch to other buffer automatically
-- [ ] dont show whitespace on minibuffer
 
 * Looks
 
@@ -183,7 +182,14 @@ From UncleDave
 
 ** Whitespace
 #+BEGIN_SRC emacs-lisp
-  (setq-default show-trailing-whitespace t)
+  (defun betafcc/whitespace-show-trailing ()
+    (setq show-trailing-whitespace t))
+
+  (defun betafcc/whitespace-toggle-show-trailing ()
+    (interactive)
+    (setq show-trailing-whitespace (not show-trailing-whitespace)))
+
+  (add-hook 'prog-mode-hook 'betafcc/whitespace-show-trailing)
 #+END_SRC
 ** Multiple cursors
 
