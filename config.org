@@ -79,6 +79,12 @@ But do tell me where I am
         column-number-mode    t)
 #+END_SRC
 
+Don't know why anyone would default to 8 spaces
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default tab-width 4)
+#+END_SRC
+
 Don't need to type full 'yes' or 'no' for confirmation
 
 #+BEGIN_SRC emacs-lisp
@@ -552,7 +558,19 @@ Unbelievably easy setup
     :ensure t)
 #+END_SRC
 
+* Shell scripts
+#+BEGIN_SRC emacs-lisp
+  (use-package sh-script
+    :init
+    (setq sh-basic-offset 2))
+#+END_SRC
 * Misc
 #+BEGIN_SRC emacs-lisp
 
 #+END_SRC
+* References
+
+- [[https://github.com/purcell/emacs.d][purcell]]
+- [[https://github.com/kaushalmodi/.emacs.d][kaushalmodi]]
+- [[https://github.com/jwiegley/dot-emacs][jwiegley]]
+
