@@ -8,10 +8,18 @@
 * Looks
 
 ** Resets
+
+Remove useless interface
+
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
+#+END_SRC
+
+Mainly to allow frame resizing with mouse-drag
+
+#+BEGIN_SRC emacs-lisp
   (xterm-mouse-mode 1)
 #+END_SRC
 
@@ -59,6 +67,9 @@ Light solarized, in sync with my kitty and kitsune config
 
 * Global Feels
 ** Resets
+
+Do not welcome me, do not back me up, do not save me, do not ring me
+But do tell me where I am
 
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-splash-screen t
@@ -181,6 +192,9 @@ From UncleDave
 #+END_SRC
 
 ** Whitespace
+
+On by default in prog-modes, but not elsewhere (minibuffer for instance)
+
 #+BEGIN_SRC emacs-lisp
   (defun betafcc/whitespace-show-trailing ()
     (setq show-trailing-whitespace t))
@@ -191,12 +205,15 @@ From UncleDave
 
   (add-hook 'prog-mode-hook 'betafcc/whitespace-show-trailing)
 #+END_SRC
-** Multiple cursors
 
-Again, based on wiegley config
+** Region bindings
+
+Took from somewhere (don't remember where), probably I can refactor
+the seemingly useless 'progn' block and 'bind-keys' inside config,
+check if the reason is that older 'use-package' was like this or if
+there is another reason
 
 #+BEGIN_SRC emacs-lisp
-
 (use-package region-bindings-mode
   :ensure t
   :config
@@ -219,13 +236,12 @@ Again, based on wiegley config
     (bind-keys
      :map region-bindings-mode-map
       ("<C-SPC>" . modi/disable-rbm-deactivate-mark))))
+#+END_SRC
+
+** Multiple cursors
 
 
-;; Time-stamp: <2017-09-20 09:52:55 kmodi>
-
-;; Multiple Cursors
-;; https://github.com/magnars/multiple-cursors.el
-
+#+BEGIN_SRC emacs-lisp
 (use-package multiple-cursors
   :bind (:map modi-mode-map
          ("C-S-c C-S-c" . mc/edit-lines)
@@ -283,8 +299,6 @@ after `multiple-cursors-mode' is quit.")
 
     (add-hook 'multiple-cursors-mode-enabled-hook #'modi/mc-when-enabled)
     (add-hook 'multiple-cursors-mode-disabled-hook #'modi/mc-when-disabled)))
-
-
 #+END_SRC
 
 
