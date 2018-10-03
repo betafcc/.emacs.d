@@ -80,9 +80,19 @@ But do tell me where I am
 #+END_SRC
 
 Don't know why anyone would default to 8 spaces
+Default to indent with spaces
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default tab-width 4)
+  (setq-default
+   case-fold-search t
+   column-number-mode t
+   delete-selection-mode t
+   tab-width 4
+   indent-tabs-mode nil
+   scroll-preserve-screen-position 'always
+   truncate-lines nil
+   truncate-partial-width-windows nil)
+
 #+END_SRC
 
 Don't need to type full 'yes' or 'no' for confirmation
@@ -199,7 +209,7 @@ From UncleDave
 
 ** Whitespace
 
-On by default in prog-modes, but not elsewhere (minibuffer for instance)
+Show trailing by default in prog-modes, but not elsewhere (minibuffer for instance)
 
 #+BEGIN_SRC emacs-lisp
   (defun betafcc/whitespace-show-trailing ()
@@ -306,7 +316,6 @@ after `multiple-cursors-mode' is quit.")
     (add-hook 'multiple-cursors-mode-enabled-hook #'modi/mc-when-enabled)
     (add-hook 'multiple-cursors-mode-disabled-hook #'modi/mc-when-disabled)))
 #+END_SRC
-
 
 ** Symbol overlay
 
