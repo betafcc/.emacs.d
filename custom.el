@@ -6,7 +6,7 @@
  '(face-font-selection-order (quote (:width :height :weight :slant)))
  '(package-selected-packages
    (quote
-    (symbol-overlay whitespace-cleanup-mode elm-mode dash-at-point counsel-dash fzf counsel swiper switch-window xclip org-bullets fancy-battery rainbow-mode centered-cursor-mode beacon solarized-theme which-key use-package))))
+    (phi-search multiple-cursors symbol-overlay whitespace-cleanup-mode elm-mode dash-at-point counsel-dash fzf counsel swiper switch-window xclip org-bullets fancy-battery rainbow-mode centered-cursor-mode beacon solarized-theme which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -17,4 +17,5 @@
  '(bold-italic ((t (:slant italic :weight bold :family "FuraCode NF-Bold"))))
  '(fixed-pitch ((t (:family "Monospace"))))
  '(italic ((t (:slant italic :family "Fira Code-Regular"))))
+ '(symbol-overlay-default-face ((t (:background "#ff8676" :foreground "black"))))
  '(variable-pitch ((t nil))))
