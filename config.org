@@ -1,6 +1,5 @@
 * TODO [0/7]
 - [ ] Add my old region moving keybindings
-- [ ] Terminal click to resize from purcell
 - [ ] paredit
 - [ ] M-n and M-p to move next/prev like region
 - [ ] always kill current buffer (stop asking me which one)
@@ -14,6 +13,7 @@
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
+  (xterm-mouse-mode 1)
 #+END_SRC
 
 [[https://github.com/bbatsov/solarized-emacs/issues/187][Solves uggly modeline underline]]
@@ -524,6 +524,8 @@ Using Wiegley config for now
 - [ ] Learn to use this shit
 
 * Elm
+
+Unbelievably easy setup
 
 #+BEGIN_SRC emacs-lisp
   (use-package elm-mode
