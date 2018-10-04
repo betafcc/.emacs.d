@@ -1,8 +1,8 @@
-* TODO [1/9]
+* TODO [3/9]
 - [X] flycheck basic setup
-- [ ] C-x C-f is out of order, why?
+- [X] C-x C-f is out of order, why?
 - [ ] Selection map: isearch from region
-- [ ] Remove hl line on term mode and similar
+- [X] Remove hl line on term mode and similar
 - [ ] Add my old region moving keybindings
 - [ ] paredit
 - [ ] M-n and M-p to move next/prev like region
@@ -53,6 +53,9 @@ Light solarized, in sync with my kitty and kitsune config
 
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode 1)
+  (dolist (hook '(term-mode-hook))
+    (add-hook hook (lambda () (setq-local global-hl-line-mode nil))))
+
   (blink-cursor-mode -1)
   (setq-default cursor-type '(bar . 3))
   (set-cursor-color "#ff8676")
@@ -116,14 +119,14 @@ Don't jump when scrolling with cursor
 Call Bash with same keybinding as kitty
 
 #+BEGIN_SRC emacs-lisp
-  (use-package ansi-term
-    :no-require t
-    :bind ("<C-S-return>" . ansi-term)
-    :init
-    (defvar my-term-shell "/bin/bash")
-    (defadvice ansi-term (before force-bash)
-      (interactive (list my-term-shell)))
-    (ad-activate 'ansi-term))
+    (use-package ansi-term
+      :no-require t
+      :bind ("<C-S-return>" . ansi-term)
+      :init
+      (defvar my-term-shell "/bin/bash")
+      (defadvice ansi-term (before force-bash)
+        (interactive (list my-term-shell)))
+      (ad-activate 'ansi-term))
 #+END_SRC
 
 ** Modes
@@ -506,15 +509,15 @@ Using Wiegley config for now
     :after (ivy hydra)
     :defer t)
 
-(use-package ivy-rich
-  :after ivy
-  :ensure t
-  :demand t
-  :config
-  (ivy-rich-mode 1)
-  (setq ivy-virtual-abbreviate 'full
-        ivy-rich-switch-buffer-align-virtual-buffer t
-        ivy-rich-path-style 'abbrev))
+  (use-package ivy-rich
+    :after ivy
+    :ensure t
+    :demand t
+    :config
+    (ivy-rich-mode 1)
+    (setq ivy-virtual-abbreviate 'full
+          ivy-rich-switch-buffer-align-virtual-buffer t
+          ivy-rich-path-style 'abbrev))
 
 #+END_SRC
 
@@ -533,8 +536,8 @@ Using Wiegley config for now
            ("C-x C-f" . counsel-find-file)
            ("C-c e l" . counsel-find-library)
            ("C-c e q" . counsel-set-variable)
-;;           ("C-h e l" . counsel-find-library)
-;;           ("C-h e u" . counsel-unicode-char)
+           ;;           ("C-h e l" . counsel-find-library)
+           ;;           ("C-h e u" . counsel-unicode-char)
            ("C-h f"   . counsel-describe-function)
            ("C-x r b" . counsel-bookmark)
            ("M-x"     . counsel-M-x)
@@ -547,8 +550,8 @@ Using Wiegley config for now
     :init
     (bind-key "M-r" #'counsel-minibuffer-history minibuffer-local-map)
     :config
-    (add-to-list 'ivy-sort-matches-functions-alist
-                 '(counsel-find-file . ivy--sort-files-by-date))
+    ;; (add-to-list 'ivy-sort-matches-functions-alist
+    ;;              '(counsel-find-file . ivy--sort-files-by-date))
 
     (defun counsel-recoll-function (string)
       "Run recoll for STRING."
@@ -561,9 +564,9 @@ Using Wiegley config for now
 
     (defun counsel-recoll (&optional initial-input)
       "Search for a string in the recoll database.
-    You'll be given a list of files that match.
-    Selecting a file will launch `swiper' for that file.
-    INITIAL-INPUT can be given as the initial minibuffer input."
+      You'll be given a list of files that match.
+      Selecting a file will launch `swiper' for that file.
+      INITIAL-INPUT can be given as the initial minibuffer input."
       (interactive)
       (counsel-require-program "recollq")
       (ivy-read "recoll: " 'counsel-recoll-function
