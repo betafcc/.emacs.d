@@ -1,4 +1,8 @@
-* TODO [0/7]
+* TODO [1/9]
+- [X] flycheck basic setup
+- [ ] C-x C-f is out of order, why?
+- [ ] Selection map: isearch from region
+- [ ] Remove hl line on term mode and similar
 - [ ] Add my old region moving keybindings
 - [ ] paredit
 - [ ] M-n and M-p to move next/prev like region
@@ -331,6 +335,56 @@ after `multiple-cursors-mode' is quit.")
       (add-hook hook 'symbol-overlay-mode)))
 #+END_SRC
 
+** Flyckeck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :commands (flycheck-mode
+               flycheck-next-error
+               flycheck-previous-error)
+    :init
+    ;; (dolist (where '((emacs-lisp-mode-hook . emacs-lisp-mode-map)
+    ;;                  (haskell-mode-hook    . haskell-mode-map)
+    ;;                  (js2-mode-hook        . js2-mode-map)
+    ;;                  (c-mode-common-hook   . c-mode-base-map)))
+    ;;   (add-hook (car where)'
+    ;;             `(lambda ()
+    ;;                (bind-key "M-n" #'flycheck-next-error ,(cdr where))
+    ;;                (bind-key "M-p" #'flycheck-previous-error ,(cdr where)))))
+    :config
+    (defalias 'show-error-at-point-soon
+      'flycheck-show-error-at-point)
+
+    (defun magnars/adjust-flycheck-automatic-syntax-eagerness ()
+      "Adjust how often we check for errors based on if there are any.
+    This lets us fix any errors as quickly as possible, but in a
+    clean buffer we're an order of magnitude laxer about checking."
+      (setq flycheck-idle-change-delay
+            (if flycheck-current-errors 0.3 3.0)))
+
+    ;; Each buffer gets its own idle-change-delay because of the
+    ;; buffer-sensitive adjustment above.
+    (make-variable-buffer-local 'flycheck-idle-change-delay)
+
+    (add-hook 'flycheck-after-syntax-check-hook
+              'magnars/adjust-flycheck-automatic-syntax-eagerness)
+
+    ;; Remove newline checks, since they would trigger an immediate check
+    ;; when we want the idle-change-delay to be in effect while editing.
+    (setq-default flycheck-check-syntax-automatically '(save
+                                                        idle-change
+                                                        mode-enabled))
+
+    (defun flycheck-handle-idle-change ()
+      "Handle an expired idle time since the last change.
+    This is an overwritten version of the original
+    flycheck-handle-idle-change, which removes the forced deferred.
+    Timers should only trigger inbetween commands in a single
+    threaded system and the forced deferred makes errors never show
+    up before you execute another command."
+      (flycheck-clear-idle-change-timer)
+      (flycheck-buffer-automatically 'idle-change)))
+#+END_SRC
 * Org
 
 Better 'unfold' symbol
