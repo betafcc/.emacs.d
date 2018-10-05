@@ -10,7 +10,6 @@
 - [ ] C-x C-b switch to other buffer automatically
 
 * Looks
-
 ** Resets
 
 Remove useless interface
@@ -119,14 +118,16 @@ Don't jump when scrolling with cursor
 Call Bash with same keybinding as kitty
 
 #+BEGIN_SRC emacs-lisp
-    (use-package ansi-term
-      :no-require t
-      :bind ("<C-S-return>" . ansi-term)
-      :init
-      (defvar my-term-shell "/bin/bash")
-      (defadvice ansi-term (before force-bash)
-        (interactive (list my-term-shell)))
-      (ad-activate 'ansi-term))
+  (use-package ansi-term
+    :no-require t
+    :bind (("<C-S-return>" . ansi-term)
+           :map org-mode-map
+           ("<C-S-return>" . ansi-term))
+    :init
+    (defvar my-term-shell "/bin/bash")
+    (defadvice ansi-term (before force-bash)
+      (interactive (list my-term-shell)))
+    (ad-activate 'ansi-term))
 #+END_SRC
 
 ** Modes
