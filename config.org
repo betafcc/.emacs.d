@@ -19,6 +19,7 @@
 - [ ] always kill current buffer (stop asking me which one)
 - [ ] C-x C-b switch to other buffer automatically
 
+
 * Looks
 ** Resets
 
@@ -58,7 +59,7 @@ Light solarized, in sync with my kitty and kitsune config
     (load-theme 'solarized-light t))
 #+END_SRC
 
-** Cursor looks
+** Cursor
 
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode 1)
@@ -407,7 +408,7 @@ Better 'unfold' symbol
   (use-package org
     :mode ("\\.org\\'"  . org-mode)
     :config
-    (setq org-ellipsis "▼"))
+    (setq org-ellipsis " ▼"))
 #+END_SRC
 
 Visual indentation
