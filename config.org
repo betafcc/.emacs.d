@@ -1,8 +1,16 @@
-* TODO [3/9]
+* TODO [3/13]
 - [X] flycheck basic setup
 - [X] C-x C-f is out of order, why?
 - [ ] M-w not to remove selection
 - [ ] Selection map: isearch from region
+- [ ] Selection map [0/3]
+  - [ ] iserach from region
+  - [ ] Solve conflicts
+  - [ ] maybe put under dedicated prefix
+- [ ] Solve:
+  **xterm--version-handler: Args out of range: "1;5002;0", 0 , 11**
+  when opening in other terminal other than kitty
+  (probably related to true-color support)
 - [X] Remove hl line on term mode and similar
 - [ ] solve ansi-term not resizing
 - [ ] Add my old region moving keybindings
