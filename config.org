@@ -1,8 +1,10 @@
 * TODO [3/9]
 - [X] flycheck basic setup
 - [X] C-x C-f is out of order, why?
+- [ ] M-w not to remove selection
 - [ ] Selection map: isearch from region
 - [X] Remove hl line on term mode and similar
+- [ ] solve ansi-term not resizing
 - [ ] Add my old region moving keybindings
 - [ ] paredit
 - [ ] M-n and M-p to move next/prev like region
