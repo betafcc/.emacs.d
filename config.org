@@ -4,6 +4,7 @@
 - [ ] M-w not to remove selection
 - [ ] Selection map: isearch from region
 - [ ] Selection map [0/3]
+  - [ ] Remove [
   - [ ] iserach from region
   - [ ] Solve conflicts
   - [ ] maybe put under dedicated prefix
@@ -82,6 +83,10 @@ Light solarized, in sync with my kitty and kitsune config
 - [ ] [[https://emacs.stackexchange.com/questions/13291][fix cursor color when launching from daemon]]
 - [ ] [[https://github.com/tonsky/FiraCode/wiki/Emacs-instructions][set fira code pretty-symbols ligatures]]
 
+** Frames
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
 * Global Feels
 ** Resets
 
@@ -243,34 +248,21 @@ Show trailing by default in prog-modes, but not elsewhere (minibuffer for instan
 
 ** Region bindings
 
-Took from somewhere (don't remember where), probably I can refactor
-the seemingly useless 'progn' block and 'bind-keys' inside config,
-check if the reason is that older 'use-package' was like this or if
-there is another reason
-
 #+BEGIN_SRC emacs-lisp
-(use-package region-bindings-mode
-  :ensure t
-  :config
-  (progn
-    ;; Do not activate `region-bindings-mode' in Special modes like `dired' and
-    ;; `ibuffer'. Single-key bindings like 'm' are useful in those modes even
-    ;; when a region is selected.
-    (setq region-bindings-mode-disabled-modes '(dired-mode
-                                                ibuffer-mode))
-
-    (region-bindings-mode-enable)
-
-    (defun modi/disable-rbm-deactivate-mark ()
-      "Disable `region-bindings-mode' and deactivate mark."
-      (interactive)
-      (region-bindings-mode -1)
-      (deactivate-mark)
-      (message "Mark deactivated"))
-
-    (bind-keys
-     :map region-bindings-mode-map
-      ("<C-SPC>" . modi/disable-rbm-deactivate-mark))))
+  (use-package selected
+    :ensure t
+    :demand t
+    :diminish selected-minor-mode
+    :bind (:map selected-keymap
+                ("[" . align-code)
+                ("f" . fill-region)
+                ("U" . unfill-region)
+                ("d" . downcase-region)
+                ("u" . upcase-region)
+                ("r" . reverse-region)
+                ("s" . sort-lines))
+    :config
+    (selected-global-mode 1))
 #+END_SRC
 
 ** Multiple cursors
