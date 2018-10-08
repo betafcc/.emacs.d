@@ -1,7 +1,9 @@
 * TODO [3/13]
 - [X] flycheck basic setup
 - [X] C-x C-f is out of order, why?
+- [X] Remove hl line on term mode and similar
 - [ ] M-w not to remove selection
+- [ ] Undo Tree
 - [ ] Selection map: isearch from region
 - [ ] Selection map [0/3]
   - [ ] Remove [
@@ -12,7 +14,6 @@
   **xterm--version-handler: Args out of range: "1;5002;0", 0 , 11**
   when opening in other terminal other than kitty
   (probably related to true-color support)
-- [X] Remove hl line on term mode and similar
 - [ ] solve ansi-term not resizing
 - [ ] Add my old region moving keybindings
 - [ ] paredit
@@ -69,6 +70,7 @@ Light solarized, in sync with my kitty and kitsune config
 
   (blink-cursor-mode -1)
   (setq-default cursor-type '(bar . 3))
+
   (set-cursor-color "#ff8676")
 
   (use-package beacon
@@ -270,12 +272,6 @@ Show trailing by default in prog-modes, but not elsewhere (minibuffer for instan
 
 #+BEGIN_SRC emacs-lisp
 (use-package multiple-cursors
-  :bind (:map modi-mode-map
-         ("C-S-c C-S-c" . mc/edit-lines)
-         ("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C-<" . mc/mark-all-like-this)
-         ("C-S-<mouse-1>" . mc/add-cursor-on-click))
   :bind (:map region-bindings-mode-map
          ("a" . mc/mark-all-like-this)
          ("p" . mc/mark-previous-like-this)
@@ -619,6 +615,25 @@ Using Wiegley config for now
 *** Todo [0/1]
 - [ ] Learn to use this shit
 
+* Evil
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :ensure t
+    :bind (("C-z" . betafcc/evil-mode-actually-toggle)
+           :map evil-motion-state-map
+           ("C-z" . betafcc/evil-mode-actually-toggle)
+           :map evil-insert-state-map
+           ("C-z" . betafcc/evil-mode-actually-toggle))
+    :preface
+    (defun betafcc/evil-mode-actually-toggle ()
+      (interactive)
+      (if (not (bound-and-true-p evil-mode))
+          (evil-mode 1)
+        (evil-emacs-state 1)
+        (evil-mode -1)))
+    :config
+    (setq evil-emacs-state-cursor (default-value 'cursor-type)))
+#+END_SRC
 * Elm
 
 Unbelievably easy setup
@@ -636,7 +651,6 @@ Unbelievably easy setup
 #+END_SRC
 * Misc
 #+BEGIN_SRC emacs-lisp
-
 #+END_SRC
 * References
 
