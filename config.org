@@ -149,7 +149,7 @@ Call Bash with same keybinding as kitty
     (ad-activate 'ansi-term))
 #+END_SRC
 
-** Modes
+** Small Modes
 
 Show keybind help
 
@@ -249,7 +249,7 @@ Show trailing by default in prog-modes, but not elsewhere (minibuffer for instan
   (add-hook 'prog-mode-hook 'betafcc/whitespace-show-trailing)
 #+END_SRC
 
-** Region bindings
+** Selected
 
 #+BEGIN_SRC emacs-lisp
   (use-package selected
@@ -258,6 +258,14 @@ Show trailing by default in prog-modes, but not elsewhere (minibuffer for instan
     :diminish selected-minor-mode
     :config
     (selected-global-mode 1))
+#+END_SRC
+
+** Expand-region
+
+#+BEGIN_SRC emacs-lisp
+  (use-package expand-region
+    :ensure t
+    :bind ("C-=" . er/expand-region))
 #+END_SRC
 
 ** Multiple cursors
@@ -614,20 +622,10 @@ Using Wiegley config for now
 #+BEGIN_SRC emacs-lisp
   (use-package evil
     :ensure t
-    :bind (("C-z" . betafcc/evil-mode-actually-toggle)
-           :map evil-motion-state-map
-           ("C-z" . betafcc/evil-mode-actually-toggle)
-           :map evil-insert-state-map
-           ("C-z" . betafcc/evil-mode-actually-toggle))
-    :preface
-    (defun betafcc/evil-mode-actually-toggle ()
-      (interactive)
-      (if (not (bound-and-true-p evil-mode))
-          (evil-mode 1)
-        (evil-emacs-state 1)
-        (evil-mode -1)))
     :config
-    (setq evil-emacs-state-cursor (default-value 'cursor-type)))
+    (setq evil-default-state 'emacs)
+    (setq evil-emacs-state-cursor (default-value 'cursor-type))
+    (evil-mode 1))
 #+END_SRC
 * Elm
 
