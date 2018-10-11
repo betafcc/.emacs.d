@@ -23,6 +23,11 @@
 - [ ] C-x C-b switch to other buffer automatically
 
 
+* Load my utils
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+#+END_SRC
+
 * Looks
 ** Resets
 
@@ -104,17 +109,11 @@ But do tell me where I am
         column-number-mode    t)
 #+END_SRC
 
-Don't know why anyone would default to 8 spaces
-Default to indent with spaces
-Don't electric everytime
 
 #+BEGIN_SRC emacs-lisp
   (setq-default
    case-fold-search t
    column-number-mode t
-   tab-width 4
-   indent-tabs-mode nil
-   electric-indent-inhibit t
    scroll-preserve-screen-position 'always
    truncate-lines nil
    truncate-partial-width-windows nil)
@@ -132,6 +131,39 @@ Don't jump when scrolling with cursor
 
 #+BEGIN_SRC emacs-lisp
   (setq scroll-conservatively 100)
+#+END_SRC
+
+** Default indentation behaviour
+
+Emacs 'smart' indentation really sucks by default,
+every new language is unusable before struggling with this,
+just use a normal sublime/atom/vscode/etc tab-behaviour unless
+the mode dictates otherwise
+
+Also:
+
+- Don't know why anyone would default to 8 spaces
+- Default to indent with spaces
+- Don't electric everytime
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default
+   tab-width 4
+   indent-tabs-mode nil
+   electric-indent-inhibit t
+   indent-line-function 'insert-tab)
+#+END_SRC
+
+** Radical TAB and BACKTAB rebinding
+
+#+BEGIN_SRC emacs-lisp
+  (use-package sane-tab
+    :bind (("<backtab>" . sane-tab-dedent-line-or-region))
+    :init
+      (dolist (where '((js2-mode-hook . js2-mode-map)))
+      (add-hook (car where)
+                `(lambda ()
+                   (bind-key (kbd "<tab>") #'sane-tab-insert-indent-string-or-indent-region ,(cdr where))))))
 #+END_SRC
 
 ** Terminal
@@ -681,15 +713,16 @@ Unbelievably easy setup
     :interpreter
     ("node" . js2-mode)
     :config
+    (add-hook 'js2-mode-hook (lambda () (setq tab-width 2)))
     (setq js2-basic-offset 2))
 
-  (use-package js2-refactor
-    :ensure t
-    :diminish js2-refactor-mode
-    :commands
-    (js2-refactor-mode)
-    :init
-    (add-hook 'js2-mode-hook #'js2-refactor-mode))
+  ;; (use-package js2-refactor
+  ;;   :ensure t
+  ;;   :diminish js2-refactor-mode
+  ;;   :commands
+  ;;   (js2-refactor-mode)
+  ;;   :init
+  ;;   (add-hook 'js2-mode-hook #'js2-refactor-mode))
 
   (use-package typescript-mode
     :ensure t
