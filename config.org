@@ -158,6 +158,7 @@ Also:
 
 #+BEGIN_SRC emacs-lisp
   (use-package sane-tab
+    :commands (sane-tab-insert-indent-string-or-indent-region)
     :bind (("<backtab>" . sane-tab-dedent-line-or-region))
     :init
       (dolist (where '((js2-mode-hook . js2-mode-map)))
