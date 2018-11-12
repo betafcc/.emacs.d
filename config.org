@@ -1,12 +1,14 @@
-* TODO [3/13]
+* TODO [5/17]
 - [X] flycheck basic setup
 - [X] C-x C-f is out of order, why?
 - [X] Remove hl line on term mode and similar
+- [X] Undo Tree
+- [X] Expand region
+- [ ] set evil to use emacs-state on term modes
+- [ ] C-l on isearch mode to not deactivate isearch
 - [ ] M-w not to remove selection
-- [ ] Undo Tree
-- [ ] Expand region
 - [ ] Selection map: isearch from region
-- [ ] Selection map [0/3]
+- [ ] Selection map [0/4]
   - [ ] Remove [
   - [ ] iserach from region
   - [ ] Solve conflicts
@@ -161,10 +163,10 @@ Also:
     :commands (sane-tab-insert-indent-string-or-indent-region)
     :bind (("<backtab>" . sane-tab-dedent-line-or-region))
     :init
-      (dolist (where '((js2-mode-hook . js2-mode-map)))
+    (dolist (where '((js2-mode-hook . js2-mode-map)))
       (add-hook (car where)
                 `(lambda ()
-                   (bind-key (kbd "<tab>") #'sane-tab-insert-indent-string-or-indent-region ,(cdr where))))))
+                   (bind-key "TAB" #'sane-tab-insert-indent-string-or-indent-region ,(cdr where))))))
 #+END_SRC
 
 ** Terminal
