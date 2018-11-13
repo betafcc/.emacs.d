@@ -1,10 +1,10 @@
-* TODO [5/17]
+* TODO [6/17]
 - [X] flycheck basic setup
 - [X] C-x C-f is out of order, why?
 - [X] Remove hl line on term mode and similar
 - [X] Undo Tree
 - [X] Expand region
-- [ ] set evil to use emacs-state on term modes
+- [X] set evil to use emacs-state on term modes
 - [ ] C-l on isearch mode to not deactivate isearch
 - [ ] M-w not to remove selection
 - [ ] Selection map: isearch from region
@@ -670,6 +670,18 @@ Unbelievably easy setup
     :config
     (setq evil-default-state 'emacs)
     (setq evil-emacs-state-cursor (default-value 'cursor-type))
+
+    (setq
+     evil-emacs-state-modes
+     (append
+      evil-emacs-state-modes
+      evil-motion-state-modes
+      evil-insert-state-modes))
+
+    (setq
+     evil-motion-state-modes nil
+     evil-insert-state-modes nil)
+
     (evil-mode 1))
 #+END_SRC
 
