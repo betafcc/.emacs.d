@@ -1,12 +1,12 @@
-* TODO [6/17]
+* TODO [7/17]
 - [X] flycheck basic setup
 - [X] C-x C-f is out of order, why?
 - [X] Remove hl line on term mode and similar
 - [X] Undo Tree
 - [X] Expand region
 - [X] set evil to use emacs-state on term modes
+- [X] M-w not to remove selection
 - [ ] C-l on isearch mode to not deactivate isearch
-- [ ] M-w not to remove selection
 - [ ] Selection map: isearch from region
 - [ ] Selection map [0/4]
   - [ ] Remove [
@@ -184,6 +184,19 @@ Call Bash with same keybinding as kitty
     (defadvice ansi-term (before force-bash)
       (interactive (list my-term-shell)))
     (ad-activate 'ansi-term))
+#+END_SRC
+
+** M-w not to remove region
+
+#+BEGIN_SRC emacs-lisp
+  (defun betafcc/kill-ring-save-keep-region (beg end &optional region)
+    (interactive (list (mark) (point)
+               (prefix-numeric-value current-prefix-arg)))
+    (kill-ring-save beg end region)
+    (setq deactivate-mark nil)
+    (message "Region saved"))
+
+  (global-set-key (kbd "M-w") 'betafcc/kill-ring-save-keep-region)
 #+END_SRC
 
 ** Small Modes
