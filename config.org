@@ -1,4 +1,4 @@
-* TODO [7/17]
+* TODO [8/17]
 - [X] flycheck basic setup
 - [X] C-x C-f is out of order, why?
 - [X] Remove hl line on term mode and similar
@@ -6,6 +6,7 @@
 - [X] Expand region
 - [X] set evil to use emacs-state on term modes
 - [X] M-w not to remove selection
+- [X] C-x C-b switch to other buffer automatically
 - [ ] C-l on isearch mode to not deactivate isearch
 - [ ] Selection map: isearch from region
 - [ ] Selection map [0/4]
@@ -22,7 +23,6 @@
 - [ ] paredit
 - [ ] M-n and M-p to move next/prev like region
 - [ ] always kill current buffer (stop asking me which one)
-- [ ] C-x C-b switch to other buffer automatically
 
 
 * Load my utils
@@ -197,6 +197,12 @@ Call Bash with same keybinding as kitty
     (message "Region saved"))
 
   (global-set-key (kbd "M-w") 'betafcc/kill-ring-save-keep-region)
+#+END_SRC
+
+** C-x C-b focus that window
+
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map [remap list-buffers] 'buffer-menu-other-window)
 #+END_SRC
 
 ** Small Modes
