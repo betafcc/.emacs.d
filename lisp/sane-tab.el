@@ -1,98 +1,79 @@
-;;
-;; note about goto-line:
-;; https://stackoverflow.com/questions/11805572/why-is-goto-line-in-emacs-for-interactive-use-only
-
-;; tab -> sane-tab-insert-indent-string-or-indent-region
-;; backtab -> sane-tab-dedent-line-or-region
-(defun sane-tab-insert-indent-string-or-indent-region ()
-  (interactive)
-  (if (use-region-p)
-      (sane-tab-indent-region (region-beginning) (region-end))
-    (insert (sane-tab-indent-string))))
+(defun sane-tab-tab-command (number-of-levels)
+  (interactive "p")
+  ;; if there is no region and on bol, do insert indent
+  (if (and (= (point) (line-beginning-position))
+           (not (and (mark) (use-region-p))))
+      (sane-tab-insert-indent number-of-levels)
+    (call-interactively (function sane-tab-indent-line-or-region))))
 
 
-(defun sane-tab-dedent-line-or-region ()
-  (interactive)
-  (if (use-region-p)
-      (sane-tab-dedent-region (region-beginning) (region-end))
-    (sane-tab-dedent-line)))
+(defun sane-tab-dedent-line-or-region (first-line until-relative-line number-of-levels)
+  (interactive (sane-tab--interactive-helper))
+  (sane-tab--helper
+   (function sane-tab-remove-indent)
+   first-line until-relative-line number-of-levels))
 
 
-(defun sane-tab-indent-region (start end)
-  (interactive "r")
-  (mapc
-   'sane-tab-indent-line-if-not-empty
-   (sane-tab-region-lines start end))
-  (setq deactivate-mark nil))
+(defun sane-tab-indent-line-or-region (first-line until-relative-line number-of-levels)
+  (interactive (sane-tab--interactive-helper))
+  (sane-tab--helper
+   (function sane-tab-insert-indent-if-not-empty-line)
+   first-line until-relative-line number-of-levels))
 
 
-(defun sane-tab-dedent-region (start end)
-  (interactive "r")
-  (mapc
-   'sane-tab-dedent-line
-   (sane-tab-region-lines start end))
-  (setq deactivate-mark nil))
+(defun sane-tab-insert-indent-if-not-empty-line (number-of-levels)
+  (unless (= (line-beginning-position)
+             (line-end-position))
+    (sane-tab-insert-indent number-of-levels)))
 
 
-(defun sane-tab-indent-line-if-not-empty (&optional n)
-  (interactive)
-  (unless (sane-tab-line-empty-p n)
-      (sane-tab-indent-line n)))
+(defun sane-tab-insert-indent (number-of-levels)
+  (insert
+   (if indent-tabs-mode
+       (make-string number-of-levels ?	) ;; tab
+     (make-string (* tab-width number-of-levels) ? ) ;; space
+     )))
 
 
-(defun sane-tab-indent-line (&optional n)
-  (interactive)
+(defun sane-tab--helper (indent-function first-line until-relative-line number-of-levels)
   (save-excursion
-    (if n
-        (goto-line n)
-    (goto-char (line-beginning-position)))
-    (insert (sane-tab-indent-string))))
+    ;; goto the beginning of lower-numbered line in region
+    (if (> until-relative-line 0)
+        (goto-char (line-beginning-position))
+      (forward-line until-relative-line)
+      (setq until-relative-line (- until-relative-line)))
+
+    (funcall indent-function number-of-levels)
+    (while (> until-relative-line 0)
+      (forward-line)
+      (funcall indent-function number-of-levels)
+      (setq until-relative-line (1- until-relative-line))))
+
+  (setq deactivate-mark nil))
 
 
-(defun sane-tab-region-lines (start end)
-  (interactive "r")
-  (number-sequence
-   (line-number-at-pos start)
-   (line-number-at-pos end)))
+(defun sane-tab--interactive-helper ()
+  (let* ((first-line (line-number-at-pos (point)))
+         (until-relative-line (if (and (mark) (use-region-p))
+                                  (- (line-number-at-pos (mark)) first-line)
+                                0))
+         (number-of-levels (or current-prefix-arg 1)))
+
+    (list first-line until-relative-line number-of-levels)))
 
 
-(defun sane-tab-indent-string ()
+(defun sane-tab-remove-indent (number-of-levels)
   (if indent-tabs-mode
-      "	" ;; a tab
-    (make-string tab-width ? )))
+      (sane-tab--remove-helper "	"  ;; tab
+                               number-of-levels)
+    (sane-tab--remove-helper " " ;; space
+                             (* number-of-levels tab-width))))
 
 
-(defun sane-tab-dedent-line (&optional n)
-  (interactive)
-  (save-excursion
-    (if n
-        (goto-line n)
-      (goto-char (line-beginning-position)))
-
-    (if indent-tabs-mode
-        (sane-tab-dedent-line-tab)
-      (sane-tab-dedent-line-spaces))))
-
-
-(defun sane-tab-dedent-line-spaces ()
-    (let ((n tab-width))
-      (while (and (> n 0) (looking-at " "))
-        (delete-char 1)
-        (setq n (- n 1)))))
-
-
-(defun sane-tab-dedent-line-tab ()
-    (if (looking-at-p (char-to-string "	" ;; a tab
-                                      ))
-        (delete-char 1)))
-
-
-(defun sane-tab-line-empty-p (&optional n)
-  (interactive)
-  (save-excursion
-    (if n (goto-line n))
-    (= (line-beginning-position)
-       (line-end-position))))
+(defun sane-tab--remove-helper (s n)
+  (while (and (> n 0) (looking-at s))
+    (delete-char 1)
+    (setq n (1- n))))
 
 
 ;; https://emacs.stackexchange.com/questions/16792

@@ -160,13 +160,13 @@ Also:
 
 #+BEGIN_SRC emacs-lisp
   (use-package sane-tab
-    :commands (sane-tab-insert-indent-string-or-indent-region)
+    :commands (sane-tab-tab-command)
     :bind (("<backtab>" . sane-tab-dedent-line-or-region))
     :init
     (dolist (where '((js2-mode-hook . js2-mode-map)))
       (add-hook (car where)
                 `(lambda ()
-                   (bind-key "TAB" #'sane-tab-insert-indent-string-or-indent-region ,(cdr where))))))
+                   (bind-key "TAB" #'sane-tab-tab-command ,(cdr where))))))
 #+END_SRC
 
 ** Terminal
