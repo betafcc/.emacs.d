@@ -161,7 +161,7 @@ Also:
 #+BEGIN_SRC emacs-lisp
   (use-package sane-tab
     :commands (sane-tab-tab-command)
-    :bind (("<backtab>" . sane-tab-dedent-line-or-region))
+    :bind (("<backtab>" . sane-tab-backtab-command))
     :init
     (dolist (where '((js2-mode-hook . js2-mode-map)))
       (add-hook (car where)
