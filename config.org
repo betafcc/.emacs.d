@@ -584,6 +584,7 @@ Using Wiegley config for now
 
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
+    :ensure t
     :after ivy
     :demand t
     :diminish
@@ -748,58 +749,17 @@ Unbelievably easy setup
     ("node" . js2-mode)
     :config
     (add-hook 'js2-mode-hook (lambda () (setq tab-width 2)))
-    (setq js2-basic-offset 2))
+    (setq js2-basic-offset 2
+          js2-mode-show-parse-errors nil
+          js2-mode-show-strict-warnings nil))
 
-  ;; (use-package js2-refactor
-  ;;   :ensure t
-  ;;   :diminish js2-refactor-mode
-  ;;   :commands
-  ;;   (js2-refactor-mode)
-  ;;   :init
-  ;;   (add-hook 'js2-mode-hook #'js2-refactor-mode))
-
-  (use-package typescript-mode
-    :ensure t
-    ;; npm install -g typescript
-    :mode
-    ("\\.ts\\'" . typescript-mode)
-    ("\\.ts$\\'" . typescript-mode)
-    :config
-    (setq typescript-enabled-frameworks '(typescript)))
-
-  (use-package js-import
-    :ensure t
-    :commands (js-import js-import-dev))
-
-  (use-package rjsx-mode
-    :ensure t
-    :mode
-    ("\\.jsx?\\'" . rjsx-mode)
-    :interpreter
-    ("node" . rjsx-mode)
-    :config
-    ;; Inspired by http://blog.binchen.org/posts/indent-jsx-in-emacs.html
-    (defun +js-jsx-indent-line-align-closing-bracket ()
-      "Workaround sgml-mode and align closing bracket with opening bracket"
-      (save-excursion
-        (beginning-of-line)
-        (when (looking-at-p "^ +\/?> *$")
-          (delete-char sgml-basic-offset))))
-
-    (advice-add #'js-jsx-indent-line
-                :after
-                #'+js-jsx-indent-line-align-closing-bracket)
-
-    (with-eval-after-load 'rjsx
-      (define-key rjsx-mode-map "<" nil)))
-
-  ;; (use-package lsp-javascript-typescript
-  ;;   :ensure t
-  ;;   :hook ((web-mode . lsp-javascript-typescript-enable)
-  ;;          (js-mode . lsp-javascript-typescript-enable)
-  ;;          (js3-mode . lsp-javascript-typescript-enable)
-  ;;          (js2-mode . lsp-javascript-typescript-enable)
-  ;;          (typescript-mode . lsp-javascript-typescript-enable)))
+  (use-package prettier-js
+    :ensure t)
+#+END_SRC
+* Python
+#+BEGIN_SRC emacs-lisp
+  (use-package python
+    :mode ("\\.py\\'" . python-mode))
 #+END_SRC
 * Shell scripts
 #+BEGIN_SRC emacs-lisp

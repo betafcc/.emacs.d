@@ -6,7 +6,7 @@
  '(face-font-selection-order (quote (:width :height :weight :slant)))
  '(package-selected-packages
    (quote
-    (lsp-mode expand-region evil phi-search multiple-cursors symbol-overlay whitespace-cleanup-mode elm-mode dash-at-point counsel-dash fzf counsel swiper switch-window xclip org-bullets fancy-battery rainbow-mode centered-cursor-mode beacon solarized-theme which-key use-package))))
+    (prettier-js lsp-mode expand-region evil phi-search multiple-cursors symbol-overlay whitespace-cleanup-mode elm-mode dash-at-point counsel-dash fzf counsel swiper switch-window xclip org-bullets fancy-battery rainbow-mode centered-cursor-mode beacon solarized-theme which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
