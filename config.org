@@ -755,6 +755,10 @@ Unbelievably easy setup
 
   (use-package prettier-js
     :ensure t)
+
+  (use-package yaml-mode
+    :ensure t
+    :mode "\\.ya?ml\\'")
 #+END_SRC
 * Python
 #+BEGIN_SRC emacs-lisp
