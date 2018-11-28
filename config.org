@@ -759,6 +759,13 @@ Unbelievably easy setup
   (use-package yaml-mode
     :ensure t
     :mode "\\.ya?ml\\'")
+
+  (use-package emmet-mode
+      :diminish
+      :ensure t
+      :config
+      (dolist (hook '(sgml-mode-hook web-mode-hook css-mode-hook))
+        (add-hook hook 'emmet-mode)))
 #+END_SRC
 * Python
 #+BEGIN_SRC emacs-lisp
