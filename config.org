@@ -753,6 +753,14 @@ Unbelievably easy setup
           js2-mode-show-parse-errors nil
           js2-mode-show-strict-warnings nil))
 
+  (use-package typescript-mode
+    :ensure t
+    :mode
+    ("\\.ts\\'" . typescript-mode)
+    ("\\.ts$\\'" . typescript-mode)
+    :config
+    (setq typescript-enabled-frameworks '(typescript)))
+
   (use-package prettier-js
     :ensure t)
 
