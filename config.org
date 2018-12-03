@@ -163,7 +163,8 @@ Also:
     :commands (sane-tab-tab-command)
     :bind (("<backtab>" . sane-tab-backtab-command))
     :init
-    (dolist (where '((js2-mode-hook . js2-mode-map)))
+    (dolist (where '((js2-mode-hook . js2-mode-map)
+                     (typescript-mode-hook . typescript-mode-map)))
       (add-hook (car where)
                 `(lambda ()
                    (bind-key "TAB" #'sane-tab-tab-command ,(cdr where))))))
@@ -760,6 +761,7 @@ Unbelievably easy setup
     ("\\.ts\\'" . typescript-mode)
     ("\\.ts$\\'" . typescript-mode)
     :config
+    (add-hook 'typescript-mode-hook (lambda () (setq tab-width 2)))
     (setq typescript-enabled-frameworks '(typescript)))
 
   (use-package prettier-js
