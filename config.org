@@ -760,6 +760,10 @@ Unbelievably easy setup
     :mode
     ("\\.ts\\'" . typescript-mode)
     ("\\.ts$\\'" . typescript-mode)
+    :bind (:map typescript-mode-map
+                ("(" . nil) (")" . nil)
+                ("{" . nil) ("}" . nil)
+                (":" . nil) (";" . nil) ("," . nil))
     :config
     (add-hook 'typescript-mode-hook (lambda () (setq tab-width 2)))
     (setq typescript-enabled-frameworks '(typescript)))
