@@ -523,7 +523,7 @@ Using Wiegley config for now
     (ivy-height 10)
     (ivy-initial-inputs-alist nil t)
     (ivy-magic-tilde nil)
-    (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+    (ivy-re-builders-alist '((t . ivy--regex-ignore-order) (counsel-ag . ivy--regex-plus)))
     (ivy-use-virtual-buffers t)
     (ivy-wrap t)
 
