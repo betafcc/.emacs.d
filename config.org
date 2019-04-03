@@ -237,9 +237,9 @@ Toggle fixed cursor on center with "C-M-l"
 Show colors automatically
 
 #+BEGIN_SRC emacs-lisp
-  (use-package rainbow-mode
-    :ensure t
-    :hook prog-mode)
+  ;; (use-package rainbow-mode
+  ;;   :ensure t
+  ;;   :hook prog-mode)
 #+END_SRC
 
 ** Misc editing
